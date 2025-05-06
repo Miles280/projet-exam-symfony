@@ -1,0 +1,23 @@
+<nav class="z-5 ">
+	<ul class="flex flex-col sm:flex-row text-white justify-center">
+
+		<li>
+			<a class="hover:bg-gray-900 transition-all py-4 px-5 block uppercase" href="{{ path('app_homepage') }}">Accueil</a>
+		</li>
+
+		<li>
+			<a class="hover:bg-gray-900 transition-all py-4 px-5 block uppercase" href="{{ path('app_about') }}">À propos</a>
+		</li>
+
+		{% if app.user %}
+		<li>
+			<a class="hover:bg-gray-900 transition-all py-4 px-5 block uppercase" href="{{ path('app_logout') }}">Se déconnecter</a>
+		</li>
+		{% else %}
+		<li>
+		    <a class="hover:bg-gray-900 transition-all py-4 px-5 block uppercase" href="{{ path('app_login') }}">Se connecter</a>
+		</li>
+		{% endif %}
+
+	</ul>
+</nav>
