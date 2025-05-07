@@ -36,7 +36,7 @@ class Role
     /**
      * @var Collection<int, Power>
      */
-    #[ORM\OneToMany(targetEntity: Power::class, mappedBy: 'role', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Power::class, mappedBy: 'role', cascade: ['persist'], orphanRemoval: true)]
     private Collection $powers;
 
     public function __construct()

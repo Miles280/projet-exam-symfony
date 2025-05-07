@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Power;
 use App\Entity\Role;
 use App\Form\RoleForm;
 use App\Repository\RoleRepository;
@@ -26,6 +27,10 @@ final class RoleController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $role = new Role();
+
+        // 🟡 Ajouter un pouvoir vide par défaut pour l’affichage du formulaire
+        $role->addPower(new Power());
+
         $form = $this->createForm(RoleForm::class, $role);
         $form->handleRequest($request);
 
