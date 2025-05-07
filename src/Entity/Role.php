@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Enum\Camp;
+
 
 #[ORM\Entity(repositoryClass: RoleRepository::class)]
 class Role
@@ -19,8 +21,8 @@ class Role
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $camp = null;
+    #[ORM\Column(type: 'string', enumType: Camp::class)]
+    private ?Camp $camp = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $goal = null;
@@ -59,17 +61,17 @@ class Role
         return $this;
     }
 
-    public function getCamp(): ?string
+    public function getCamp(): ?Camp
     {
         return $this->camp;
     }
 
-    public function setCamp(string $camp): static
+    public function setCamp(Camp $camp): static
     {
         $this->camp = $camp;
-
         return $this;
     }
+
 
     public function getGoal(): ?string
     {
