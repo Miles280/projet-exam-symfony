@@ -1,43 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Role index{% endblock %}
+{% block title %}Rôles{% endblock %}
 
 {% block body %}
-    <h1>Role index</h1>
+<div class="max-w-6xl mx-auto p-6">
+	<h2 class="text-3xl font-bold mb-6 text-center">Liste des rôles</h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Camp</th>
-                <th>Goal</th>
-                <th>Description</th>
-                <th>MinPlayer</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for role in roles %}
-            <tr>
-                <td>{{ role.id }}</td>
-                <td>{{ role.name }}</td>
-                <td>{{ role.camp.name }}</td>
-                <td>{{ role.goal }}</td>
-                <td>{{ role.description }}</td>
-                <td>{{ role.minPlayer }}</td>
-                <td>
-                    <a href="{{ path('app_role_show', {'id': role.id}) }}">show</a>
-                    <a href="{{ path('app_role_edit', {'id': role.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+		{% for role in roles %}
+			<div class="bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-200">
+				<h2 class="text-xl font-semibold text-green-400 mb-2">{{ role.name }}</h2>
+				<p class="text-sm text-gray-400 mb-1">
+					<span class="font-medium text-white">Camp :</span> {{ role.camp.name }}
+				</p>
+				<p class="text-sm text-gray-400 mb-1">
+					<span class="font-medium text-white">But :</span> {{ role.goal }}
+				</p>
+				<p class="text-sm text-gray-400 mb-1">
+					<span class="font-medium text-white">Min. joueurs :</span> {{ role.minPlayer }}
+				</p>
+				<p class="text-sm text-gray-400 mt-3 italic">{{ role.description|length > 100 ? role.description[:100] ~ '…' : role.description }}</p>
 
-    <a href="{{ path('app_role_new') }}">Create new</a>
+				<div class="mt-4 flex justify-between">
+					<a href="{{ path('app_role_show', {'id': role.id}) }}" class="text-blue-400 hover:underline text-sm">Voir</a>
+					<a href="{{ path('app_role_edit', {'id': role.id}) }}" class="text-yellow-400 hover:underline text-sm">Modifier</a>
+				</div>
+			</div>
+		{% else %}
+			<p class="col-span-3 text-center text-gray-400">Aucun rôle trouvé.</p>
+		{% endfor %}
+	</div>
+
+	<div class="mt-8 text-center">
+		<a href="{{ path('app_role_new') }}" class="inline-block bg-green-600 text-white px-6 py-2 rounded hover:bg-green-500">Créer un nouveau rôle</a>
+	</div>
+</div>
 {% endblock %}
