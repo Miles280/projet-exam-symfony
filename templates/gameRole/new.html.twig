@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un rôle{% endblock %}
+
+{% block body %}
+<div class="max-w-3xl mx-auto p-6 bg-gray-800 shadow-lg rounded-lg m-8 ">
+	<h1 class="text-3xl font-bold mb-6 text-center text-white">Créer un nouveau rôle</h1>
+
+	{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.name.vars.id }}">Nom du rôle</label>
+			{{ form_widget(form.name, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+			{{ form_errors(form.name) }}
+		</div>
+
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.camp.vars.id }}">Camp</label>
+			{{ form_widget(form.camp, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500'}}) }}
+			{{ form_errors(form.camp) }}
+		</div>
+
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.goal.vars.id }}">But (si indépendant)</label>
+			{{ form_widget(form.goal, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500'}}) }}
+			{{ form_errors(form.goal) }}
+		</div>
+
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.description.vars.id }}">Description</label>
+			{{ form_widget(form.description, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500'}}) }}
+			{{ form_errors(form.description) }}
+		</div>
+
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.minPlayer.vars.id }}">Nombre minimum de joueurs</label>
+			{{ form_widget(form.minPlayer, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500'}}) }}
+			{{ form_errors(form.minPlayer) }}
+		</div>
+
+		{% if form.powers is defined %}
+			<h2 class="text-2xl font-semibold text-white mt-8 mb-4">Pouvoir(s)</h2>
+			<div data-collection-holder class="space-y-4">
+				{% for powerForm in form.powers %}
+					<div class="bg-gray-700 border border-gray-600 p-4 rounded-lg">
+						<div class="mb-3">
+							<label class="block text-sm text-white font-medium mb-1">Nom du pouvoir</label>
+							{{ form_widget(powerForm.title, {'attr': {'class': 'w-full p-2 rounded bg-gray-800 text-white border border-gray-600'}}) }}
+						</div>
+						<div class="mb-3">
+							<label class="block text-sm text-white font-medium mb-1">Description</label>
+							{{ form_widget(powerForm.description, {'attr': {'class': 'w-full p-2 rounded bg-gray-800 text-white border border-gray-600'}}) }}
+						</div>
+						<div>
+							<label class="block text-sm text-white font-medium mb-1">Position</label>
+							{{ form_widget(powerForm.position, {'attr': {'class': 'w-full p-2 rounded bg-gray-800 text-white border border-gray-600'}}) }}
+						</div>
+					</div>
+				{% else %}
+					<p class="text-sm text-gray-300">Aucun pouvoir pour le moment.</p>
+				{% endfor %}
+			</div>
+		{% endif %}
+
+		<div class="text-center mt-8">
+			<button class="bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded shadow font-medium">
+				Enregistrer le rôle
+			</button>
+		</div>
+	{{ form_end(form) }}
+
+	<div class="mt-6 text-center">
+		<a href="{{ path('app_game_role_index') }}" class="text-blue-400 hover:underline">← Retour à la liste</a>
+	</div>
+</div>
+{% endblock %}

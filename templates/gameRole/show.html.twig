@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ role.name }}
+{% endblock %}
+
+{% block body %}
+	<div class="max-w-3xl mx-auto p-6 bg-gray-800 shadow-lg rounded-lg mt-8">
+		<div class="flex items-center justify-between">
+			{% if role.camp.value == 'villageois' %}
+				<h2 class="text-3xl font-semibold text-villageois mb-2">{{ role.name }}</h2>
+				<img src="{{ asset('pictures/villageois_logo.png') }}" alt="Villageois logo" class="w-10 h-10">
+			{% elseif role.camp.value == 'sorciere' %}
+				<h2 class="text-3xl font-semibold text-sorciere mb-2">{{ role.name }}</h2>
+				<img src="{{ asset('pictures/sorciere_logo.png') }}" alt="Sorcière logo" class="w-10 h-10">
+			{% elseif role.camp.value == 'independant' %}
+				<h2 class="text-3xl font-semibold text-independant mb-2">{{ role.name }}</h2>
+				<img src="{{ asset('pictures/independant_logo.png') }}" alt="Indépendant logo" class="w-10 h-10">
+			{% endif %}
+		</div>
+
+		<br><p class="text-center text-gray-300 mb-3 italic">{{ role.description }}</p><br>
+
+		<div class="space-y-2">
+			<p class="text-gray-300">
+				<span class="font-semibold text-white">Camp :</span>
+				{{ role.camp.name }}
+			</p>
+
+			{% if role.camp.value == 'independant' %}
+				<p class="text-gray-300">
+					<span class="font-semibold text-white">But :</span>
+					{{ role.goal }}
+				</p>
+			{% endif %}
+
+			<p class="text-gray-300">
+				<span class="font-semibold text-white">Min. joueurs :</span>
+				{{ role.minPlayer }}
+			</p>
+
+				<div class="mt-4">
+					<h2 class="text-lg font-semibold text-white mb-2">Pouvoir(s) :</h2>
+					{% for power in role.powers %}
+						<div class="border border-gray-700 p-3 rounded bg-gray-700 mb-3">
+							<p class="text-sm text-white font-medium">{{ power.title }}</p>
+							<p class="text-sm text-gray-300">{{ power.description }}</p>
+						</div>
+					{% endfor %}
+				</div>
+
+		</div>
+
+		<div class="flex justify-between items-center mt-6">
+			<a href="{{ path('app_game_role_index') }}" class="text-blue-400 hover:underline">← Retour à la liste</a>
+			<a href="{{ path('app_game_role_edit', {'id': role.id}) }}" class="bg-amber-600 hover:bg-amber-500 text-black px-4 py-2 rounded text-sm font-medium">
+				Modifier
+			</a>
+		</div>
+	</div>
+{% endblock %}

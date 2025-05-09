@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rôles
+{% endblock %}
+
+{% block body %}
+	<div class="max-w-6xl mx-auto p-6">
+		<h1 class="text-3xl font-bold mb-6 text-center">Liste des rôles</h1>
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+			{% for role in roles %}
+				<div class="bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-200 h-72 flex flex-col justify-between">
+					<div class="flex items-center justify-between">
+						{% if role.camp.value == 'villageois' %}
+							<h1 class="text-xl font-semibold text-villageois mb-2">{{ role.name }}</h1>
+							<img src="{{ asset('pictures/villageois_logo.png') }}" alt="Villageois logo" class="w-8 h-8">
+						{% elseif role.camp.value == 'sorciere' %}
+							<h1 class="text-xl font-semibold text-sorciere mb-2">{{ role.name }}</h1>
+							<img src="{{ asset('pictures/sorciere_logo.png') }}" alt="Sorcière logo" class="w-8 h-8">
+						{% elseif role.camp.value == 'independant' %}
+							<h1 class="text-xl font-semibold text-independant mb-2">{{ role.name }}</h1>
+							<img src="{{ asset('pictures/independant_logo.png') }}" alt="Indépendant logo" class="w-8 h-8">
+						{% endif %}
+					</div>
+
+					<p class="text-sm text-gray-300 mt-3 italic flex-grow">{{ role.description }}</p>
+
+					<p class="text-sm text-gray-300 mb-1">
+						<span class="font-medium text-white">Camp :</span>
+						{{ role.camp.name }}
+					</p>
+					{% if role.camp.value == 'independant' %}
+						<p class="text-sm text-gray-300 mb-1">
+							<span class="font-medium text-white">But :</span>
+							{{ role.goal }}
+						</p>
+					{% endif %}
+					<p class="text-sm text-gray-300 mb-1">
+						<span class="font-medium text-white">Min. joueurs :</span>
+						{{ role.minPlayer }}
+					</p>
+
+					<a href="{{ path('app_game_role_show', {'id': role.id}) }}" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm max-w-40 block mx-auto text-center">
+						Voir le rôle
+					</a>
+
+				</div>
+			{% else %}
+				<p class="col-span-3 text-center text-gray-300">Aucun rôle trouvé.</p>
+			{% endfor %}
+		</div>
+
+		<div class="mt-8 text-center">
+			<a href="{{ path('app_game_role_new') }}" class="inline-block bg-green-600 text-white px-6 py-2 rounded hover:bg-green-500">Créer un nouveau rôle</a>
+		</div>
+	</div>
+{% endblock %}
