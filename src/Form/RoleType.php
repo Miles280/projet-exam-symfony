@@ -11,7 +11,7 @@ use App\Form\PowerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Enum\Camp;
 
-class RoleForm extends AbstractType
+class RoleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -30,6 +30,7 @@ class RoleForm extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
+                'prototype' => true,
             ])
             ->add('minPlayer')
         ;

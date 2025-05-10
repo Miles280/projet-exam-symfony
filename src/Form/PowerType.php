@@ -16,7 +16,7 @@ class PowerType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('position')
+            // ->add('position')
         ;
     }
 

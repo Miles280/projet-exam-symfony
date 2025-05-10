@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Power;
 use App\Entity\Role;
-use App\Form\RoleForm;
+use App\Form\RoleType;
 use App\Repository\RoleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,13 +30,18 @@ final class GameRoleController extends AbstractController
     {
         $role = new Role();
 
-        // 🟡 Ajouter un pouvoir vide par défaut pour l’affichage du formulaire
-        $role->addPower(new Power());
+        $role->addPower(new Power()); // Ajoute un pouvoir vide par défaut pour l’affichage du formulaire
 
-        $form = $this->createForm(RoleForm::class, $role);
+        $form = $this->createForm(RoleType::class, $role);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $index = 1;
+            foreach ($role->getPowers() as $power) {
+                $power->setPosition($index++);
+            }
+
             $entityManager->persist($role);
             $entityManager->flush();
 
@@ -60,7 +65,7 @@ final class GameRoleController extends AbstractController
     #[Route('/{id}/edit', name: 'app_game_role_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Role $role, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(RoleForm::class, $role);
+        $form = $this->createForm(RoleType::class, $role);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
