@@ -1,45 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Créer un rôle{% endblock %}
+{% block title %}Créer un rôle
+{% endblock %}
 
 {% block body %}
-<div class="max-w-3xl mx-auto p-6 bg-gray-800 shadow-lg rounded-lg m-8">
-	<h1 class="text-3xl font-bold mb-6 text-center text-white">Créer un nouveau rôle</h1>
+	<div class="max-w-3xl mx-auto p-6 bg-gray-800 shadow-lg rounded-lg m-8">
+		<h1 class="text-3xl font-bold mb-6 text-center text-white">Créer un nouveau rôle</h1>
 
-	{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
+		{{ form_start(form, {'attr': {'class': 'space-y-6'}}) }}
 
-	<div>
-		<label class="block text-white font-medium mb-1" for="{{ form.name.vars.id }}">Nom du rôle</label>
-		{{ form_widget(form.name, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
-		{{ form_errors(form.name) }}
-	</div>
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.name.vars.id }}">Nom du rôle</label>
+			{{ form_widget(form.name, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500'}}) }}
+			{{ form_errors(form.name) }}
+		</div>
 
-	<div>
-		<label class="block text-white font-medium mb-1" for="{{ form.camp.vars.id }}">Camp</label>
-		{{ form_widget(form.camp, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500'}}) }}
-		{{ form_errors(form.camp) }}
-	</div>
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.camp.vars.id }}">Camp</label>
+			{{ form_widget(form.camp, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500'}}) }}
+			{{ form_errors(form.camp) }}
+		</div>
 
-	<div>
-		<label class="block text-white font-medium mb-1" for="{{ form.goal.vars.id }}">But (si indépendant)</label>
-		{{ form_widget(form.goal, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500'}}) }}
-		{{ form_errors(form.goal) }}
-	</div>
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.goal.vars.id }}">But (si indépendant)</label>
+			{{ form_widget(form.goal, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500'}}) }}
+			{{ form_errors(form.goal) }}
+		</div>
 
-	<div>
-		<label class="block text-white font-medium mb-1" for="{{ form.description.vars.id }}">Description</label>
-		{{ form_widget(form.description, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500'}}) }}
-		{{ form_errors(form.description) }}
-	</div>
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.description.vars.id }}">Description</label>
+			{{ form_widget(form.description, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500'}}) }}
+			{{ form_errors(form.description) }}
+		</div>
 
-	<div>
-		<label class="block text-white font-medium mb-1" for="{{ form.minPlayer.vars.id }}">Nombre minimum de joueurs</label>
-		{{ form_widget(form.minPlayer, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500'}}) }}
-		{{ form_errors(form.minPlayer) }}
-	</div>
+		<div>
+			<label class="block text-white font-medium mb-1" for="{{ form.minPlayer.vars.id }}">Nombre minimum de joueurs</label>
+			{{ form_widget(form.minPlayer, {'attr': {'class': 'w-full p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500'}}) }}
+			{{ form_errors(form.minPlayer) }}
+		</div>
 
-	{% if form.powers is defined %}
-		{% set prototype %}
+		{% if form.powers is defined %}
+			{% set prototype %}
 			<div class="power-item bg-gray-700 border border-gray-600 p-4 rounded-lg relative">
 				<div class="mb-3">
 					<label class="block text-sm text-white font-medium mb-1">Nom du pouvoir</label>
@@ -50,82 +51,82 @@
 					{{ form_widget(form.powers.vars.prototype.description, {'attr': {'class': 'w-full p-2 rounded bg-gray-800 text-white border border-gray-600'}}) }}
 				</div>
 			</div>
-		{% endset %}
+			{% endset %}
 
-		<h2 class="text-2xl font-semibold text-white mt-8 mb-4">Pouvoir(s)</h2>
+			<h2 class="text-2xl font-semibold text-white mt-8 mb-4">Pouvoir(s)</h2>
 
-		<div data-collection-holder class="space-y-4" data-prototype="{{ prototype|e('html_attr') }}">
-			{% for powerForm in form.powers %}
-				<div class="power-item bg-gray-700 border border-gray-600 p-4 rounded-lg relative">
-					<div class="mb-3">
-						<label class="block text-sm text-white font-medium mb-1">Nom du pouvoir</label>
-						{{ form_widget(powerForm.title, {'attr': {'class': 'w-full p-2 rounded bg-gray-800 text-white border border-gray-600'}}) }}
+			<div data-collection-holder class="space-y-4" data-prototype="{{ prototype|e('html_attr') }}">
+				{% for powerForm in form.powers %}
+					<div class="power-item bg-gray-700 border border-gray-600 p-4 rounded-lg relative">
+						<div class="mb-3">
+							<label class="block text-sm text-white font-medium mb-1">Nom du pouvoir</label>
+							{{ form_widget(powerForm.title, {'attr': {'class': 'w-full p-2 rounded bg-gray-800 text-white border border-gray-600'}}) }}
+						</div>
+						<div class="mb-3">
+							<label class="block text-sm text-white font-medium mb-1">Description</label>
+							{{ form_widget(powerForm.description, {'attr': {'class': 'w-full p-2 rounded bg-gray-800 text-white border border-gray-600'}}) }}
+						</div>
+						<button type="button" class="remove-power-btn absolute top-2 right-2 text-sm bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded">
+							X
+						</button>
 					</div>
-					<div class="mb-3">
-						<label class="block text-sm text-white font-medium mb-1">Description</label>
-						{{ form_widget(powerForm.description, {'attr': {'class': 'w-full p-2 rounded bg-gray-800 text-white border border-gray-600'}}) }}
-					</div>
-					<button type="button" class="remove-power-btn absolute top-2 right-2 text-sm bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded">
-						X
-					</button>
-				</div>
-			{% endfor %}
-		</div>
+				{% endfor %}
+			</div>
 
-		<div class="mt-4 text-center">
-			<button type="button" class="text-sm add-power-btn bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded">
-				+ Ajouter un pouvoir
+			<div class="mt-4 text-center">
+				<button type="button" class="text-sm add-power-btn bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded">
+					+ Ajouter un pouvoir
+				</button>
+			</div>
+		{% endif %}
+
+		<div class="text-center mt-8">
+			<button class="bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded shadow font-medium">
+				Enregistrer le rôle
 			</button>
 		</div>
-	{% endif %}
 
-	<div class="text-center mt-8">
-		<button class="bg-green-600 hover:bg-green-500 text-white px-6 py-2 rounded shadow font-medium">
-			Enregistrer le rôle
-		</button>
+		{{ form_end(form) }}
+
+		<div class="mt-6 text-center">
+			<a href="{{ path('app_game_role_index') }}" class="text-blue-400 hover:underline">← Retour à la liste</a>
+		</div>
 	</div>
 
-	{{ form_end(form) }}
-
-	<div class="mt-6 text-center">
-		<a href="{{ path('app_game_role_index') }}" class="text-blue-400 hover:underline">← Retour à la liste</a>
-	</div>
-</div>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-		const holder = document.querySelector('[data-collection-holder]');
-		const addBtn = document.querySelector('.add-power-btn');
-
-		if (!holder || !addBtn) return;
-
-		let index = holder.querySelectorAll('.power-item').length;
-
-		addBtn.addEventListener('click', () => {
-			const prototype = holder.getAttribute('data-prototype');
-			const newFormHtml = prototype.replace(/__name__/g, index);
-
-			const tempDiv = document.createElement('div');
-			tempDiv.innerHTML = newFormHtml.trim();
-			const powerDiv = tempDiv.firstElementChild;
-
-			const removeBtn = document.createElement('button');
-			removeBtn.type = 'button';
-			removeBtn.className = 'remove-power-btn absolute top-2 right-2 text-sm bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded';
-			removeBtn.innerText = 'X';
-			removeBtn.addEventListener('click', () => powerDiv.remove());
-
-			powerDiv.appendChild(removeBtn);
-			holder.appendChild(powerDiv);
-			index++;
-		});
-
-		document.querySelectorAll('.remove-power-btn').forEach(btn => {
-			btn.addEventListener('click', (e) => {
-				const item = e.target.closest('.power-item');
-				if (item) item.remove();
+	 <script>
+		document.addEventListener('DOMContentLoaded', function () {
+			const holder = document.querySelector('[data-collection-holder]');
+			const addBtn = document.querySelector('.add-power-btn');
+	
+			if (!holder || !addBtn) return;
+	
+			let index = holder.querySelectorAll('.power-item').length;
+	
+			addBtn.addEventListener('click', () => {
+				const prototype = holder.getAttribute('data-prototype');
+				const newFormHtml = prototype.replace(/__name__/g, index);
+	
+				const tempDiv = document.createElement('div');
+				tempDiv.innerHTML = newFormHtml.trim();
+				const powerDiv = tempDiv.firstElementChild;
+	
+				const removeBtn = document.createElement('button');
+				removeBtn.type = 'button';
+				removeBtn.className = 'remove-power-btn absolute top-2 right-2 text-sm bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded';
+				removeBtn.innerText = 'X';
+				removeBtn.addEventListener('click', () => powerDiv.remove());
+	
+				powerDiv.appendChild(removeBtn);
+				holder.appendChild(powerDiv);
+				index++;
+			});
+	
+			document.querySelectorAll('.remove-power-btn').forEach(btn => {
+				btn.addEventListener('click', (e) => {
+					const item = e.target.closest('.power-item');
+					if (item) item.remove();
+				});
 			});
 		});
-	});
-</script>
+	</script>
 {% endblock %}
