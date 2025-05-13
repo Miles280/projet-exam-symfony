@@ -16,12 +16,27 @@ use Symfony\Component\Routing\Attribute\Route;
 final class GameRoleController extends AbstractController
 {
     #[Route('/', name: 'app_game_role_index', methods: ['GET'])]
-    public function index(RoleRepository $roleRepository): Response
+    public function index(Request $request, RoleRepository $roleRepository): Response
     {
-        $roles = $roleRepository->findAll();
+        $camp = $request->query->get('camp');
+        $search = $request->query->get('search');
+
+        if ($search) {
+            $roles = $roleRepository->findByName($search);
+        } elseif ($camp) {
+            $roles = $roleRepository->findByCamp($camp);
+        } elseif (!$search && !$camp) {
+            $roles = $roleRepository->findAll();
+        }
+
+        if (!empty($search)) {
+            $camp = null;
+        }
 
         return $this->render('gameRole/index.html.twig', [
             'roles' => $roles,
+            'search' => $search,
+            'selectedCamp' => $camp,
         ]);
     }
 
