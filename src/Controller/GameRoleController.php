@@ -25,11 +25,12 @@ final class GameRoleController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/new', name: 'app_game_role_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_game_role_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $role = new Role();
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
+        $role = new Role();
         $role->addPower(new Power()); // Ajoute un pouvoir vide par défaut pour l’affichage du formulaire
 
         $form = $this->createForm(RoleType::class, $role);
@@ -62,9 +63,11 @@ final class GameRoleController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/{id}/edit', name: 'app_game_role_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_game_role_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Role $role, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(RoleType::class, $role);
         $form->handleRequest($request);
 
