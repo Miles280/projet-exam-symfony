@@ -10,11 +10,11 @@
 			{% if role.camp.value == 'villageois' %}
 				<h2 class="text-3xl font-semibold text-villageois mb-2">{{ role.name }}</h2>
 				<img src="{{ asset('pictures/villageois_logo.png') }}" alt="Villageois logo" class="w-10 h-10">
-			{% elseif role.camp.value == 'sorciere' %}
-				<h2 class="text-3xl font-semibold text-sorciere mb-2">{{ role.name }}</h2>
+			{% elseif role.camp.value == 'sorcieres' %}
+				<h2 class="text-3xl font-semibold text-sorcieres mb-2">{{ role.name }}</h2>
 				<img src="{{ asset('pictures/sorciere_logo.png') }}" alt="Sorcière logo" class="w-10 h-10">
-			{% elseif role.camp.value == 'independant' %}
-				<h2 class="text-3xl font-semibold text-independant mb-2">{{ role.name }}</h2>
+			{% elseif role.camp.value == 'independants' %}
+				<h2 class="text-3xl font-semibold text-independants mb-2">{{ role.name }}</h2>
 				<img src="{{ asset('pictures/independant_logo.png') }}" alt="Indépendant logo" class="w-10 h-10">
 			{% endif %}
 		</div>
@@ -27,7 +27,7 @@
 				{{ role.camp.name }}
 			</p>
 
-			{% if role.camp.value == 'independant' %}
+			{% if role.camp.value == 'independants' %}
 				<p class="text-gray-300">
 					<span class="font-semibold text-white">But :</span>
 					{{ role.goal }}
