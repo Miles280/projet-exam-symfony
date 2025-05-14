@@ -21,17 +21,7 @@ final class GameRoleController extends AbstractController
         $camp = $request->query->get('camp');
         $search = $request->query->get('search');
 
-        if ($search) {
-            $roles = $roleRepository->findByName($search);
-        } elseif ($camp) {
-            $roles = $roleRepository->findByCamp($camp);
-        } elseif (!$search && !$camp) {
-            $roles = $roleRepository->findAll();
-        }
-
-        if (!empty($search)) {
-            $camp = null;
-        }
+        $roles = $roleRepository->findWithSearch($search, $camp);
 
         return $this->render('gameRole/index.html.twig', [
             'roles' => $roles,

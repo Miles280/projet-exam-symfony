@@ -17,6 +17,40 @@ class RoleRepository extends ServiceEntityRepository
     }
 
     /**
+     * Recherche les rôles selon des critères facultatifs de nom et de camp.
+     *
+     * Cette méthode utilise un QueryBuilder modulable pour permettre une recherche
+     * flexible :
+     * - Si le paramètre $search est renseigné, elle effectue une recherche partielle
+     *   sur le nom du rôle (`LIKE`).
+     * - Si le paramètre $camp est renseigné, elle filtre les rôles appartenant à ce camp.
+     * - Si aucun des deux paramètres n'est renseigné, elle retourne tous les rôles.
+     *
+     * Les résultats sont toujours triés par nombre minimum de joueurs (minPlayer) de façon croissante.
+     *
+     * @param string|null $search Une chaîne partielle à rechercher dans le nom du rôle (ou null pour ignorer)
+     * @param string|null $camp   Le nom exact du camp à filtrer (ou null pour ignorer)
+     *
+     * @return Role[] Un tableau d'entités Role correspondant aux critères de recherche
+     */
+    public function findWithSearch(?string $search = null, ?string $camp = null): array
+    {
+        $qb = $this->createQueryBuilder('r');
+
+        if ($search) {
+            $qb->andWhere('r.name LIKE :search')
+                ->setParameter('search', '%' . $search . '%');
+        }
+        if ($camp) {
+            $qb->andWhere('r.camp = :camp')
+                ->setParameter('camp', $camp);
+        }
+        return $qb->orderBy('r.minPlayer', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Récupère tous les rôles dont le nom correspond exactement à la valeur donnée,
      * triés par nombre minimum de joueurs croissant.
      *
@@ -34,6 +68,7 @@ class RoleRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    // Ancienne commande non utilisée
 
     /**
      * Récupère tous les rôles appartenant à un camp donné,
@@ -53,6 +88,7 @@ class RoleRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    // Ancienne commande non utilisée
 
     //    public function findOneBySomeField($value): ?Role
     //    {
