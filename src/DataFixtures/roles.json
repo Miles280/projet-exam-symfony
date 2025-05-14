@@ -55,7 +55,7 @@
     "name": "Braconnier",
     "description": "Un villageois qui garde son fidèle fusil à portée de main jusqu’à son dernier souffle.",
     "camp": "villageois",
-    "goal": "Sauver le village",
+    "goal": "Sauver le village.",
     "minPlayer": 6,
     "powers": [
       {
@@ -74,7 +74,7 @@
     "name": "Diseuse de bonnes aventures",
     "description": "Une vieille femme qui cherche à guider le village vers la vérité.",
     "camp": "villageois",
-    "goal": "Sauver le village",
+    "goal": "Sauver le village.",
     "minPlayer": 6,
     "powers": [
       {
@@ -88,7 +88,7 @@
     "name": "Occultiste",
     "description": "Un adorateur des arts mystiques qui protège le village.",
     "camp": "villageois",
-    "goal": "Sauver le village",
+    "goal": "Sauver le village.",
     "minPlayer": 6,
     "powers": [
       {
@@ -102,7 +102,7 @@
     "name": "Baba la poule magique",
     "description": "Une poule antique dont nul ne connaît l’origine.",
     "camp": "villageois",
-    "goal": "Sauver le village",
+    "goal": "Sauver le village.",
     "minPlayer": 8,
     "powers": [
       {
