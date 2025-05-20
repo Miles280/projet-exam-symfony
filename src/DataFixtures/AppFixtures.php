@@ -43,14 +43,14 @@ class AppFixtures extends Fixture
 
         $regularUser = new User();
         $regularUser
-            ->setUsername('Rionas')
+            ->setUsername('user')
             ->setPassword($this->hasher->hashPassword($regularUser, 'mdp'));
 
         $manager->persist($regularUser);
 
         $adminUser = new User();
         $adminUser
-            ->setUsername('Miles')
+            ->setUsername('admin')
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->hasher->hashPassword($adminUser, 'mdp'));
 
