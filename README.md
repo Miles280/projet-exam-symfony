@@ -1,7 +1,3 @@
-Voici un exemple de fichier `README.md` que tu peux fournir à ton formateur pour expliquer ton projet :
-
----
-
 # 🧙‍♂️ Chasse aux Sorcières – Gestion des Rôles
 
 Bienvenue dans le projet Symfony réalisé dans le cadre de ma formation. Ce site a pour objectif de gérer les rôles d’un jeu de débat appelé **Chasse aux Sorcières**, inspiré du Loup-Garou.
